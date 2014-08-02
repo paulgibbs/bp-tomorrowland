@@ -1,13 +1,13 @@
 FORMAT: 1A
 
-# BuddyPress REST API
-An experiment with wireframing and mocking a REST API for BuddyPress. Any eventual API for BuddyPress will be implemented using [WP-API](https://github.com/WP-API/WP-API).
+# BuddyPress JS API
+An experiment with wireframing and mocking a JS (REST) API for BuddyPress. Any eventual API for BuddyPress will be implemented using [WP-API](https://github.com/WP-API/WP-API).
 
-# Activity
+# Group Activity
 The Activity component provides global, personal, and group activity streams with threaded commenting, direct posting, favoriting, and @mentions, all with full RSS feed and email notification support.
 
-## Notes Collection [/notes]
-### List all Notes [GET]
+## Activity Collection [/notes]
+### List all Activities [GET]
 + Response 200 (application/json)
 
         [{
@@ -27,8 +27,9 @@ The Activity component provides global, personal, and group activity streams wit
 
         { "id": 3, "title": "Buy cheese and bread for breakfast." }
 
-## Note [/notes/{id}]
-A single Note object with all its details
+
+## Activity [/notes/{id}]
+A single Activity object with all its details
 
 + Parameters
     + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
@@ -48,5 +49,5 @@ A single Note object with all its details
 + Response 204
 
 
-# xProfile
+# Group xProfile
 The xProfile component allows you to customise your community with fully editable profile fields that allow your users to describe themselves.
