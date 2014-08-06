@@ -6,19 +6,19 @@ An experiment with wireframing and mocking a JS (REST) API for BuddyPress. Any e
 # Group Activity
 The Activity component provides global, personal, and group activity streams with threaded commenting, direct posting, favoriting, and @mentions, all with full RSS feed and email notification support.
 
-## Activity Collection [/notes]
+## Activity Collection [/activity]
 ### List all Activities [GET]
 + Response 200 (application/json)
 
         [{
-          "id": 1, "title": "Jogging in park"
+          "id": 1, "user_id": 1, "action": "Admin posted and update", "content": "Hey, how's it going?"
         }, {
-          "id": 2, "title": "Pick-up posters from post-office"
+          "id": 2, "user_id": 10, "action": "Admin posted and update", "content": "Hey, how's it going?"
         }, {
-          "id": 3, "title": "testing api out"
+          "id": 3, "user_id": 5, "action": "Admin posted and update", "content": "Hey, how's it going?"
         }]
 
-### Create a Note [POST]
+### Create Activity [POST]
 + Request (application/json)
 
         { "title": "Buy cheese and bread for breakfast." }
@@ -28,13 +28,13 @@ The Activity component provides global, personal, and group activity streams wit
         { "id": 3, "title": "Buy cheese and bread for breakfast." }
 
 
-## Activity [/notes/{id}]
+## Activity [/activity/{id}]
 A single Activity object with all its details
 
 + Parameters
     + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
 
-### Retrieve a Note [GET]
+### Retrieve Activity [GET]
 + Response 200 (application/json)
 
     + Header
@@ -45,7 +45,7 @@ A single Activity object with all its details
 
             { "id": 2, "title": "Pick-up posters from post-office" }
 
-### Remove a Note [DELETE]
+### Remove Activity [DELETE]
 + Response 204
 
 
