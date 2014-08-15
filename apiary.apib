@@ -11,31 +11,31 @@ The Activity component provides global, personal, and group activity streams wit
 + Request (application/json)
 
 + Parameters
-    + max = `0` (optional, integer) ... Maximum number of results to return (defaults to unlimited).
-    + page = `1` (optional, integer) ... The page of results to get. Used for pagination.
-    + per_page = `25` (optional, integer) ... Results per page.
-    + sort = 'DESC' (optional, string) ... Sorts results by timestamp, in this order.
-        + Values
-            + `ASC`
-            + `DESC`
+    + count_total = `false` (optional, bool) ... If true, an additional DB query is run to count the total activity items for the query.
+    + date_query = `array` (optional, array) ... Filter by date. See first parameter of `WP_Date_Query` for format.
     + display_comments = `false` (optional, bool|string) ... Whether to return comments.
         + Values
             + `false` No comments.
             + `"stream"` Show comments within the activity stream.
             + `"threaded"` Show comments threaded below the related activity item.
-    + search_terms (optional, string) ... Search for activities matching this value.
-    + meta_query = `array` (optional, array) ... Filter by activity meta. See `WP_Meta_Query` for format.
-    + date_query = `array` (optional, array) ... Filter by date. See first parameter of `WP_Date_Query` for format.
-    + show_hidden = `false` (optional, bool) ... Whether to show activity items that are hidden site-wide.
     + exclude  (optional, string) ... Comma-separated list of activity IDs to exclude from results.
     + in  (optional, string) ...  Comma-separated list of activity IDs to include in results.
+    + max = `0` (optional, integer) ... Maximum number of results to return (defaults to unlimited).
+    + meta_query = `array` (optional, array) ... Filter by activity meta. See `WP_Meta_Query` for format.
+    + page = `1` (optional, integer) ... The page of results to get. Used for pagination.
+    + per_page = `25` (optional, integer) ... Results per page.
+    + show_hidden = `false` (optional, bool) ... Whether to show activity items that are hidden site-wide.
+    + search_terms (optional, string) ... Search for activities matching this value.
+    + sort = 'DESC' (optional, string) ... Sorts results by timestamp, in this order.
+        + Values
+            + `ASC`
+            + `DESC`
     + spam = `"ham_only"` (optional, string) ... Whether to fetch activity items that have been marked as spam.
         + Values
+            + `"all"` Ham and spam.
             + `"ham_only"` No spam.
             + `"spam_only"` Only spam.
-            + `"all"` Ham and spam.
     + update_meta_cache = `true` (optional, bool) ... Whether to pre-fetch metadata for queried activity items.
-    + count_total = `false` (optional, bool) ... If true, an additional DB query is run to count the total activity items for the query.
 
 + Response 200 (application/json)
 
