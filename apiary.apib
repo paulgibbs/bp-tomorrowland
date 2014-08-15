@@ -27,7 +27,9 @@ The Activity component provides global, personal, and group activity streams wit
 
 + Response 201 (application/json)
 
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+    + Header
+
+            Location: http://example.com/new_thing.html
 
 
 ## Activity [/activity/{id}]
@@ -52,11 +54,7 @@ A single Activity object with all its details
 
     + Header
 
-            X-My-Header: The Value
-
-    + Body
-
-            { "id": 2, "title": "Pick-up posters from post-office" }
+            Location: http://example.com/new_thing.html
 
 ### Remove Activity [DELETE]
 + Response 204
