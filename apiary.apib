@@ -8,7 +8,6 @@ The Activity component provides global, personal, and group activity streams wit
 
 ## Activity Collection [/activity]
 ### List all Activities [GET]
-Get activities.
 
 + Request (application/json)
 
@@ -41,13 +40,27 @@ Get activities.
 
 + Response 200 (application/json)
 
-        [{
-          "id": 1, "user_id": 1, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }, {
-          "id": 2, "user_id": 10, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }, {
-          "id": 3, "user_id": 5, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }]
+    [{
+        "id": 554,
+        "user_id": 1,
+        "component": "xprofile",
+        "type": "updated_profile"
+        "action": '<a href="http://example.com/members/admin/profile/">admin</a>&#8217;s profile was updated',
+        "content": "",
+        "primary_link": "http://example.com/members/admin/profile/",
+        "item_id": 0,
+        "secondary_item_id": 0,
+        "date_recorded": "2014-08-10 16:54:37",
+        "hide_sitewide": 0,
+        "mptt_left": 0,
+        "mptt_right": 0,
+        "is_spam": 0,
+        "user_email": "example@example.com",
+        "user_nicename": "admin",
+        "user_login": "admin",
+        "display_name": "admin",
+        "user_fullname": "admin"
+    }]
 
 ### Create Activity [POST]
 + Request (application/json)
@@ -58,7 +71,7 @@ Get activities.
 
     + Header
 
-            Location: http://example.com/new_thing.html
+        Location: http://example.com/new_thing.html
 
 
 ## Activity [/activity/{id}]
