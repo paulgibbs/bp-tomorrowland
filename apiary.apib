@@ -22,7 +22,7 @@ The Activity component provides global, personal, and group activity streams wit
         + Values
             + `false` No comments.
             + `"stream"` Show comments within the activity stream.
-            + `"threaded" Show comments threaded below the related activity item.
+            + `"threaded"` Show comments threaded below the related activity item.
     + search_terms (optional, string) ... Search for activities matching this value.
     + meta_query = `array` (optional, array) ... Filter by activity meta. See `WP_Meta_Query` for format.
     + date_query = `array` (optional, array) ... Filter by date. See first parameter of `WP_Date_Query` for format.
@@ -31,9 +31,9 @@ The Activity component provides global, personal, and group activity streams wit
     + in  (optional, string) ...  Comma-separated list of activity IDs to include in results.
     + spam = `"ham_only"` (optional, string) ... Whether to fetch activity items that have been marked as spam.
         + Values
-            + `"ham_only` No spam.
-            + `"spam_only` Only spam.
-            + `"all` Ham and spam.
+            + `"ham_only"` No spam.
+            + `"spam_only"` Only spam.
+            + `"all"` Ham and spam.
     + update_meta_cache = `true` (optional, bool) ... Whether to pre-fetch metadata for queried activity items.
     + count_total = `false` (optional, bool) ... If true, an additional DB query is run to count the total activity items for the query.
 
