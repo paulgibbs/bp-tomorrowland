@@ -11,54 +11,54 @@ The Activity component provides global, personal, and group activity streams wit
 + Request (application/json)
 
 + Parameters
-    + appId (required, number, `1`) ... Application ID (`appId`)
-    + userId (optional, number, `1`) ... Numeric `userId` of the User object to manage
+	+ appId (required, number, `1`) ... Application ID (`appId`)
+	+ userId (optional, number, `1`) ... Numeric `userId` of the User object to manage
 
 + Response 200 (application/json)
 
-        [{
-          "id": 1, "user_id": 1, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }, {
-          "id": 2, "user_id": 10, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }, {
-          "id": 3, "user_id": 5, "action": "Admin posted and update", "content": "Hey, how's it going?"
-        }]
+	[{
+		"id": 1, "user_id": 1, "action": "Admin posted and update", "content": "Hey, how's it going?"
+	}, {
+		"id": 2, "user_id": 10, "action": "Admin posted and update", "content": "Hey, how's it going?"
+	}, {
+		"id": 3, "user_id": 5, "action": "Admin posted and update", "content": "Hey, how's it going?"
+	}]
 
 ### Create Activity [POST]
 + Request (application/json)
 
-        { "title": "Buy cheese and bread for breakfast." }
+	{ "title": "Buy cheese and bread for breakfast." }
 
 + Response 201 (application/json)
 
-    + Header
+	+ Header
 
-            Location: http://example.com/new_thing.html
+		Location: http://example.com/new_thing.html
 
 
 ## Activity [/activity/{id}]
 A single Activity object with all its details
 
 + Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
+	+ id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
 
 ### Retrieve Activity [GET]
 + Response 200 (application/json)
 
-    + Header
+	+ Header
 
-            X-My-Header: The Value
+		X-My-Header: The Value
 
-    + Body
+	+ Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+		{ "id": 2, "title": "Pick-up posters from post-office" }
 
 ### Update Activity [POST]
 + Response 201 (application/json)
 
-    + Header
+	+ Header
 
-            Location: http://example.com/new_thing.html
+		Location: http://example.com/new_thing.html
 
 ### Remove Activity [DELETE]
 + Response 204
