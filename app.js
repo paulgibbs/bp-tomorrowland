@@ -1,24 +1,25 @@
 (function( $, _, Backbone, undefined ) {
+	// I don't care too much that these are in gloval scope.
+	var Activity, ActivityCollection, ActivityListView, ActivityItem,
+		activityCollection, activityListView;
+
 
 	/**
 	 * Models
 	 */
 
-	var Activity = Backbone.Model.extend( {
-		defaults: {
-			age: 30,
-			name: 'Guest User',
-			occupation: 'worker'
-		}
-	});
+	Activity = Backbone.Model.extend( {
+		urlRoot: 'https://private-f0fb3-bptomorrowland.apiary-mock.com/activity/'
+	} );
 
 
 	/**
 	 * Collections
 	 */
 
-	var ActivityCollection = Backbone.Collection.extend( {
-		model: Activity
+	ActivityCollection = Backbone.Collection.extend( {
+		model: Activity,
+		url:   'https://private-f0fb3-bptomorrowland.apiary-mock.com/activity'
 	} );
 
 
@@ -26,7 +27,7 @@
 	 * Views
 	 */
 
-	var ActivityListView = Backbone.View.extend( {
+	ActivityListView = Backbone.View.extend( {
 		className: 'activities',
 		tagName:   'ul',
 
@@ -40,7 +41,7 @@
 		}
 	} );
 
-	var ActivityItem = Backbone.View.extend({
+	ActivityItem = Backbone.View.extend({
 		tagName:  'li',
 		template: _.template( $( '#activityItemTemplate' ).html() ),
 		
@@ -50,35 +51,24 @@
 		}
 	} );
 
+
 	/**
-	 * Data initialisation / initialise the main view
+	 * Data initialisation / initialise the main page view.
 	 */
-	var activityCollection = new ActivityCollection( [
-		{
-			age:  26,
-			name: 'Mohit Jain'
-		},
-		{
-			age:        25,
-			name:       'Taroon Tyagi',
-			occupation: 'web designer'
-		},
-		{
-			name:       'Rahul Narang',
-			occupation: 'Java Developer'
+
+	activityCollection = new ActivityCollection().fetch( {
+		success: function( activityCollection ) {
+			activityListView = new ActivityListView( { collection: activityCollection } );
+
+
+			/**
+			 * “Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.”
+			 *
+			 *  -- Lewis Carroll
+			 */
+			$( document ).ready( function() {
+				$( document.body ).append( activityListView.render().el );
+			} );
 		}
-	] );
-
-	var activityListView = new ActivityListView( { collection: activityCollection } );
-
-
-	/**
-	 * “Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.”
-	 *
-	 *  -- Lewis Carroll
-	 */
-	$( document ).ready( function() {
-		$( document.body ).append( activityListView.render().el );
 	} );
-
 })( jQuery, _, Backbone );
