@@ -32,11 +32,14 @@
 		tagName:   'ul',
 
 		render: function() {
+			var container = document.createDocumentFragment();
+
 			this.collection.each( function( activity ) {
 				var activityView = new ActivityItem( { model: activity } );
-				this.$el.append( activityView.render().el );
+				container.appendChild( activityView.render().el );
 			}, this );
 
+			this.$el.append( container );
 			return this;
 		}
 	} );
