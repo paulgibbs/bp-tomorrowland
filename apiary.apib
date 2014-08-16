@@ -6,7 +6,7 @@ An experiment with wireframing and mocking a JS (REST) API for BuddyPress. Any e
 # Group Activity
 The Activity component provides global, personal, and group activity streams with threaded commenting, direct posting, favoriting, and @mentions, all with full RSS feed and email notification support.
 
-## Activity Collection [/activity{?count_total,date,display_comments,exclude,in,max,meta_query,page,per_page,show_hidden,search_terms,sort,spam,update_meta_cache}]
+## Activity Collection [/activity{?count_total,date_query,display_comments,exclude,in,max,meta_query,page,per_page,show_hidden,search_terms,sort,spam,update_meta_cache}]
 ### List all Activities [GET]
 
 + Parameters
@@ -25,7 +25,7 @@ The Activity component provides global, personal, and group activity streams wit
     + per_page = `25` (optional, integer) ... Results per page.
     + show_hidden = `false` (optional, bool) ... Whether to show activity items that are hidden site-wide.
     + search_terms (optional, string) ... Search for activities matching this value.
-    + sort = 'DESC' (optional, string) ... Sorts results by timestamp, in this order.
+    + sort = `"DESC"` (optional, string) ... Sorts results by timestamp, in this order.
         + Values
             + `ASC`
             + `DESC`
@@ -38,7 +38,7 @@ The Activity component provides global, personal, and group activity streams wit
 
 + Response 200 (application/json)
 
-    [{
+        [{
         "action": "<a href='http://example.com/members/admin/profile/''>admin</a>&#8217;s profile was updated",
         "component": "xprofile",
         "content": "",
@@ -58,7 +58,7 @@ The Activity component provides global, personal, and group activity streams wit
         "user_id": 1,
         "user_login": "admin",
         "user_nicename": "admin"
-    }]
+        }]
 
 ### Create Activity [POST]
 + Request (application/json)
@@ -69,7 +69,7 @@ The Activity component provides global, personal, and group activity streams wit
 
     + Header
 
-        Location: http://example.com/new_thing.html
+            Location: http://example.com/new_thing.html
 
 
 ## Activity [/activity/{id}]
