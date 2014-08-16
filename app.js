@@ -1,70 +1,84 @@
 (function( $, _, Backbone, undefined ) {
 
-	// Person Model
-	var Person = Backbone.Model.extend({
+	/**
+	 * Models
+	 */
+
+	var Activity = Backbone.Model.extend( {
 		defaults: {
-			name: 'Guest User',
 			age: 30,
+			name: 'Guest User',
 			occupation: 'worker'
 		}
 	});
 
-	// A List of People
-	var PeopleCollection = Backbone.Collection.extend({
-		model: Person
-	});
+
+	/**
+	 * Collections
+	 */
+
+	var ActivityCollection = Backbone.Collection.extend( {
+		model: Activity
+	} );
 
 
-	// View for all people
-	var PeopleView = Backbone.View.extend({
-		tagName: 'ul',
+	/**
+	 * Views
+	 */
+
+	var ActivityListView = Backbone.View.extend( {
+		className: 'activities',
+		tagName:   'ul',
 
 		render: function() {
-			this.collection.each(function(person) {
-				var personView = new PersonView({ model: person });
-				this.$el.append(personView.render().el);
-			}, this);
+			this.collection.each( function( activity ) {
+				var activityView = new ActivityItem( { model: activity } );
+				this.$el.append( activityView.render().el );
+			}, this );
 
 			return this;
 		}
-	});
+	} );
 
-	// The View for a Person
-	var PersonView = Backbone.View.extend({
-		tagName: 'li',
-
-
-		template: _.template($('#personTemplate').html() ),
+	var ActivityItem = Backbone.View.extend({
+		tagName:  'li',
+		template: _.template( $( '#activityItemTemplate' ).html() ),
 		
 		render: function() {
-			this.$el.html( this.template(this.model.toJSON()) );
+			this.$el.html( this.template( this.model.toJSON() ) );
 			return this;
 		}
-	});
+	} );
 
-	var peopleCollection = new PeopleCollection([
+	/**
+	 * Data initialisation / initialise the main view
+	 */
+	var activityCollection = new ActivityCollection( [
 		{
-			name: 'Mohit Jain',
-			age: 26
+			age:  26,
+			name: 'Mohit Jain'
 		},
 		{
-			name: 'Taroon Tyagi',
-			age: 25,
+			age:        25,
+			name:       'Taroon Tyagi',
 			occupation: 'web designer'
 		},
 		{
-			name: 'Rahul Narang',
-			age: 27.4,
+			name:       'Rahul Narang',
 			occupation: 'Java Developer'
 		}
-	]);
+	] );
 
-	var peopleView = new PeopleView({ collection: peopleCollection });
+	var activityListView = new ActivityListView( { collection: activityCollection } );
 
 
-	// “Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.” -- Lewis Carroll
+	/**
+	 * “Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.”
+	 *
+	 *  -- Lewis Carroll
+	 */
 	$( document ).ready( function() {
-		$(document.body).append(peopleView.render().el);
-	});
+		$( document.body ).append( activityListView.render().el );
+	} );
 
 })( jQuery, _, Backbone );
