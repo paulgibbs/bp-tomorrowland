@@ -6,7 +6,7 @@ An experiment with wireframing and mocking a JS (REST) API for BuddyPress. Any e
 # Group Activity
 The Activity component provides global, personal, and group activity streams with threaded commenting, direct posting, favoriting, and @mentions, all with full RSS feed and email notification support.
 
-## Activity Collection [/activity{?count_total,date_query,display_comments,exclude,in,max,meta_query,page,per_page,show_hidden,search_terms,sort,spam,update_meta_cache}]
+## Activities [/activity{?count_total,date_query,display_comments,exclude,in,max,meta_query,page,per_page,show_hidden,search_terms,sort,spam,update_meta_cache}]
 ### List all Activities [GET]
 
 + Parameters
@@ -39,9 +39,9 @@ The Activity component provides global, personal, and group activity streams wit
 + Response 200 (application/json)
 
         [{
-        "action": "<a href='http://example.com/members/admin/profile/''>admin</a>&#8217;s profile was updated",
+        "action": "<a href='http://example.com/members/admin/profile/'>admin</a>&#8217;s posted an update",
         "component": "xprofile",
-        "content": "",
+        "content": "BuddyPress is awesome!",
         "date_recorded": "2014-08-10 16:54:37",
         "display_name": "admin",
         "hide_sitewide": 0,
@@ -52,7 +52,7 @@ The Activity component provides global, personal, and group activity streams wit
         "mptt_right": 0,
         "secondary_item_id": 0,
         "primary_link": "http://example.com/members/admin/profile/",
-        "type": "updated_profile",
+        "type": "activity_update",
         "user_email": "example@example.com",
         "user_fullname": "admin",
         "user_id": 1,
@@ -60,17 +60,48 @@ The Activity component provides global, personal, and group activity streams wit
         "user_nicename": "admin"
         }]
 
-### Create Activity [POST]
-+ Request (application/json)
+## Activities [/activity]
 
-        { "title": "Buy cheese and bread for breakfast." }
+### Create Activity [POST]
+
++ Parameters
+    + action = `""` (optional, string) ... The activity name. Only used if the internal activity type's `format_callback` handler is missing (e.g. when the owning component is disabled).
+    + content = `""` (optional, string) ... The activity content.
+    + component (string) ... The name of the component associated with the activity item.
+        + Values
+            + `"activity"`
+            + `"blogs"`
+            + `"friends"`
+            + `"groups"`
+            + `"members"`
+            + `"messages"`
+            + `"notifications"`
+            + `"settings"`
+            + `"xprofile"`
+    + date_recorded = `now` (optional, string) ... The GMT timestamp of when the activity item was recorded, in `Y-m-d h:i:s` format.
+    + hide_sitewide = `false` (optional, bool) ... Should the activity item be hidden on sitewide streams?
+    + is_spam = `false` (optional, bool) ... Should the activity item be marked as spam?
+    + item_id = `0` (optional, integer) ... The ID of the associated item. Depends on the activity `type`.
+    + primary_link = `""` (optional, string) ... The permalink to the thing that this activity item is about.
+    + secondary_item_id = `0` (optional, integer) ... The ID of a secondary associated item. Depends on the activity `type`.
+    + type (string) ... The type of this activity (e.g. activity_update TODO).
+    + user_id = `current user's ID` (optional, integer) ... The ID of the user associated with this activity item. Can be left unset if the item is not related to a specific user.
+
++ Request (application/json)
+    + Body
+
+            {
+            "content": "BuddyPress is awesome!",
+            "primary_link": "http://example.com/activity/p/554",
+            "component": "activity",
+            "type": "activity_update"
+            }
 
 + Response 201 (application/json)
 
-    + Header
+    + Headers
 
-            Location: http://example.com/new_thing.html
-
+            Location: /activity/123
 
 ## Activity [/activity/{id}]
 A single Activity object with all its details
@@ -81,7 +112,7 @@ A single Activity object with all its details
 ### Retrieve Activity [GET]
 + Response 200 (application/json)
 
-    + Header
+    + Headers
 
             X-My-Header: The Value
 
@@ -89,15 +120,21 @@ A single Activity object with all its details
 
             { "id": 2, "title": "Pick-up posters from post-office" }
 
++ Response 404 (application/json)
+
 ### Update Activity [POST]
 + Response 201 (application/json)
 
-    + Header
+    + Headers
 
             Location: http://example.com/new_thing.html
 
++ Response 404 (application/json)
+
 ### Remove Activity [DELETE]
-+ Response 204
++ Response 200 (application/json)
+
++ Response 404 (application/json)
 
 
 # Group xProfile
